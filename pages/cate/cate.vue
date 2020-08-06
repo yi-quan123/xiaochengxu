@@ -1,5 +1,9 @@
 <template>
   <view>
+    <!-- 使用自定义的搜索组件 -->
+    <!-- <my-search :bgcolor="'pink'" :radius="3"></my-search> -->
+    <my-search @click="gotoSearch"></my-search>
+
     <view class="scroll-view-container">
       <!-- 左侧的滑动区域 -->
       <scroll-view class="left-scroll-view" scroll-y="true" :style="{height: wh + 'px'}">
@@ -43,7 +47,7 @@
     },
     onLoad() {
       const sysInfo = uni.getSystemInfoSync()
-      this.wh = sysInfo.windowHeight
+      this.wh = sysInfo.windowHeight - 50
 
       this.getCateList()
     },
@@ -62,13 +66,18 @@
 
         // 重新为二级分类赋值
         this.cateLevel2 = this.cateList[i].children
-        
+
         this.scrollTop = this.scrollTop === 0 ? 1 : 0
       },
       // 跳转到商品列表页面
       gotoGoodsList(item) {
         uni.navigateTo({
           url: '/subpkg/goods_list/goods_list?cid=' + item.cat_id
+        })
+      },
+      gotoSearch() {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
         })
       }
     }
@@ -126,7 +135,7 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 10px;
-      
+
       image {
         width: 60px;
         height: 60px;
