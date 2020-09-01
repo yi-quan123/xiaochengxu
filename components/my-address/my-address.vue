@@ -45,7 +45,7 @@
           this.updateAddress(succ)
         }
 
-        if (err && err.errMsg === 'chooseAddress:fail auth deny') {
+        if (err && (err.errMsg === 'chooseAddress:fail auth deny' || err.errMsg === 'chooseAddress:fail authorize no response')) {
           // 通过调用这个方法，让用户重新授权
           this.reAuth()
         }
